@@ -55,7 +55,44 @@ body {
         inset: 0;
         top: -15%;
         right: -50%;
-        z-index: -1;
+        z-index: -2;
+    }
+
+    @media (width >= 40em) {
+        &::before {
+            background: no-repeat url(../assets/bg-main-tablet.png);
+            top: -15%;
+            left: -50%;
+            z-index: -2;
+        }
+
+        &::after {
+            content: url(../assets/bg-pattern-1.svg);
+            transform: scale(0.8);
+            position: absolute;
+            top: -75px;
+            right: -55px;
+            z-index: -1;
+        }
+    }
+
+    @media (width >= 64em) {
+        &::before {
+            background: no-repeat url(../assets/bg-main-desktop.png);
+            background-size: 80% auto;
+            top: -20%;
+            left: -20%;
+            z-index: -2;
+        }
+
+        &::after {
+            content: url(../assets/bg-pattern-1.svg);
+            transform: scale(1);
+            position: absolute;
+            top: -40px;
+            right: 0;
+            z-index: -1;
+        }
     }
 }
 
@@ -66,11 +103,21 @@ footer {
 
     & .logo {
         max-width: 147px;
+        max-height: 32px;
+    }
+
+    @media (width >= 40em) {
+        margin: 24px 40px 80px;
+    }
+
+    @media (width >= 64em) {
+        max-width: 1110px;
+        margin: 24px auto 90px;
     }
 }
 
 header {
-    padding-block: 16px;
+    padding-block: 36px;
 }
 
 .hero {
@@ -86,29 +133,91 @@ header {
         font-size: var(--text-base);
         line-height: var(--line-16);
     }
+
+    @media (width >= 40em) {
+        & h1 {
+            max-width: 75%;
+            margin-bottom: 28px;
+            letter-spacing: -0.73px;
+        }
+
+        & p {
+            font-size: var(--text-main);
+            width: 47ch;
+        }
+    }
+
+    @media (width >= 64em) {
+        margin-bottom: 0;
+
+        & h1 {
+            max-width: 90%;
+            margin-bottom: 28px;
+            letter-spacing: -0.73px;
+        }
+
+        & p {
+            line-height: var(--line-20);
+            width: 70ch;
+        }
+    }
 }
 
 .content {
+    --content-padding: 44px;
+    --img-height: 430px;
+
     display: grid;
     place-items: center;
     position: relative;
-    padding-block: 44px;
+    padding-block: var(--content-padding);
 
     & img {
-        width: 209px;
+        height: var(--img-height);
         max-width: 312px;
     }
 
     &::before {
-        content: url(../assets/bg-pattern-2.svg);
+        content: '';
         display: grid;
         justify-content: center;
-        background: var(--black);
+        background: top -30px center / 280px 420px no-repeat url(../assets/bg-pattern-2.svg) var(--black);
         border-radius: 12px;
         inset: 0;
         margin-block: 98px;
         position: absolute;
         z-index: -1;
+    }
+
+    @media (width >= 40em) {
+        --img-height: 556px;
+        --content-padding: 60px;
+
+        padding: var(--content-padding);
+        margin: 0 35px;
+        grid-template-rows: calc(var(--img-height) / 2);
+
+        & img {
+            place-self: flex-start;
+        }
+
+        &::before {
+            margin-block: calc(138px + var(--content-padding)) calc(96px + var(--content-padding));
+        }
+    }
+
+    @media (width >= 64em) {
+        --img-height: 642px;
+        --content-padding: 100px;
+
+        grid-template-rows: calc(var(--img-height) / 2.5);
+        max-width: 1110px;
+        margin: 0 auto;
+
+        &::before {
+            margin-block: calc(213px + var(--content-padding)) calc(115px + var(--content-padding));
+            background-position: top -40px left 336px;
+        }
     }
 }
 
@@ -121,6 +230,7 @@ header {
     flex-direction: column;
     padding: 48px 36px;
     gap: 12px;
+    max-width: 400px;
 
     & h2 {
         font-size: var(--text-xl);
@@ -158,6 +268,7 @@ header {
         gap: 8px;
         cursor: pointer;
         font-family: inherit;
+        transition: background 0.5s ease;
 
         &.apple {
             background: var(--black);
@@ -166,6 +277,11 @@ header {
             &::before {
                 content: url(../assets/icon-apple.svg);
             }
+
+            &:hover,
+            &:focus {
+                background: var(--cyan);
+            }
         }
 
         &.android {
@@ -173,6 +289,34 @@ header {
                 content: url(../assets/icon-android.svg);
                 transform: translateY(2px);
             }
+
+            &:hover,
+            &:focus {
+                background: var(--yellow);
+            }
+        }
+    }
+
+    @media (width >= 40em) {
+        place-self: flex-end;
+        padding: 48px;
+        gap: 16px;
+
+        & p {
+            line-height: var(--line-20);
+        }
+    }
+
+    @media (width >= 64em) {
+        padding: 57px;
+        max-width: 446px;
+
+        & h2 {
+            margin-bottom: 6px;
+        }
+
+        & h3 {
+            margin-bottom: 30px;
         }
     }
 }
@@ -193,6 +337,27 @@ footer {
             font-weight: 700;
         }
     }
+
+    @media (width >= 40em) {
+        & section {
+            flex-direction: row;
+            justify-content: space-between;
+
+            & p {
+                max-width: 40ch;
+            }
+        }
+    }
+
+    @media (width >= 64em) {
+        display: flex;
+        gap: 136px;
+
+        & section {
+            margin: 0;
+            width: 100%;
+        }
+    }
 }
 
 .social {
@@ -200,5 +365,13 @@ footer {
     align-items: center;
     gap: 20px;
     list-style-type: none;
+    
+    & .icon path {
+        transition: fill 0.5s ease;
+    }
 
+    & .icon:hover path,
+    & .icon:focus path {
+        fill: var(--orange)
+    }
 }
